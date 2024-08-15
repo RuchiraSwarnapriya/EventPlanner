@@ -17,6 +17,7 @@ export default StyleSheet.create({
   },
   textButton: {
     alignSelf: 'flex-end',
-    marginRight: 5,
+    marginRight: 15,
+    marginTop: 10,
   },
 });

@@ -43,10 +43,11 @@ const LoginScreen = (props: {navigation: any}) => {
           secureTextEntry={true}
           doubleIcons={true}
         />
+        <View style={styles.textButton}>
+          <TextButton buttonText="Restore password" onPress={resetPassword} />
+        </View>
       </View>
-      <View style={styles.textButton}>
-        <TextButton buttonText="Restore password" onPress={resetPassword} />
-      </View>
+
       <View style={styles.buttonContainer}>
         <Button buttonText="Login" onPress={login} />
         <Button buttonText="Sign Up" onPress={signUp} />
