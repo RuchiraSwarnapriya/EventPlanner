@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -37,34 +44,44 @@ const LoginScreen = (props: {navigation: any}) => {
   };
 
   return (
-    <View style={styles.mainContainer}>
-      <Titles title="Welcome" subTitle="Welcome to your portal" />
-      <View style={styles.inputContainer}>
-        <CustomTextInput
-          label={'Email'}
-          placeholder={'Please enter your email'}
-          onChangeText={setEmail}
-          value={email}
-          mailInput={true}
-        />
-        <CustomTextInput
-          label={'Password'}
-          placeholder={'Please enter your password'}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-          value={password}
-          doubleIcons={true}
-        />
-        <View style={styles.textButton}>
-          <TextButton buttonText="Restore password" onPress={resetPassword} />
-        </View>
-      </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <View style={styles.mainContainer}>
+            <Titles title="Welcome" subTitle="Welcome to your portal" />
+            <View style={styles.inputContainer}>
+              <CustomTextInput
+                label={'Email'}
+                placeholder={'Please enter your email'}
+                onChangeText={setEmail}
+                value={email}
+                mailInput={true}
+              />
+              <CustomTextInput
+                label={'Password'}
+                placeholder={'Please enter your password'}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+                value={password}
+                doubleIcons={true}
+              />
+              <View style={styles.textButton}>
+                <TextButton
+                  buttonText="Restore password"
+                  onPress={resetPassword}
+                />
+              </View>
+            </View>
 
-      <View style={styles.buttonContainer}>
-        <Button buttonText="Login" onPress={onLogin} />
-        <Button buttonText="Sign Up" onPress={signUp} />
-      </View>
-    </View>
+            <View style={styles.buttonContainer}>
+              <Button buttonText="Login" onPress={onLogin} />
+              <Button buttonText="Sign Up" onPress={signUp} />
+            </View>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

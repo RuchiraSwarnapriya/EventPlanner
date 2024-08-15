@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -8,6 +14,7 @@ import Titles from '../../components/titles';
 import {LOGIN_SCREEN} from '../../navigation/routePaths';
 
 import styles from './styles';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const SignUpScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -24,38 +31,45 @@ const SignUpScreen = (props: {navigation: any}) => {
   };
 
   return (
-    <View style={styles.mainContainer}>
-      <Titles title="Welcome" subTitle="Welcome to your portal" />
-      <View style={styles.inputContainer}>
-        <CustomTextInput
-          label={'Email'}
-          placeholder={'Please enter your email'}
-          onChangeText={setEmail}
-          mailInput={true}
-          value={email}
-        />
-        <CustomTextInput
-          label={'Password'}
-          placeholder={'Please enter your password'}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-          doubleIcons={true}
-          value={password}
-        />
-        <CustomTextInput
-          label={'Confirm Password'}
-          placeholder={'Please enter your password again'}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={true}
-          doubleIcons={true}
-          value={confirmPassword}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button buttonText="Sign Up" onPress={signUp} />
-        <Button buttonText="Login" onPress={login} />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <View style={styles.mainContainer}>
+            <Titles title="Welcome" subTitle="Welcome to your portal" />
+            <View style={styles.inputContainer}>
+              <CustomTextInput
+                label={'Email'}
+                placeholder={'Please enter your email'}
+                onChangeText={setEmail}
+                mailInput={true}
+                value={email}
+              />
+              <CustomTextInput
+                label={'Password'}
+                placeholder={'Please enter your password'}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+                doubleIcons={true}
+                value={password}
+              />
+              <CustomTextInput
+                label={'Confirm Password'}
+                placeholder={'Please enter your password again'}
+                onChangeText={setConfirmPassword}
+                secureTextEntry={true}
+                doubleIcons={true}
+                value={confirmPassword}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button buttonText="Sign Up" onPress={signUp} />
+              <Button buttonText="Login" onPress={login} />
+            </View>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
