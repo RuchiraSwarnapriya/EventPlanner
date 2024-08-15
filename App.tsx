@@ -1,9 +1,10 @@
 import React from 'react';
+import './gesture-handler';
 
-import {SafeAreaView} from 'react-native';
+import MainRoute from './src/navigation/routes';
 
 function App(): React.JSX.Element {
-  return <SafeAreaView />;
+  return <MainRoute />;
 }
 
 export default App;
