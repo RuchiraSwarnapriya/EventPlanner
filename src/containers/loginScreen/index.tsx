@@ -1,10 +1,56 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
-const LoginScreen = () => {
+import Button from '../../components/buttons/solidButton';
+import CustomTextInput from '../../components/customTextInput';
+import TextButton from '../../components/buttons/textButton';
+import Titles from '../../components/titles';
+
+import {SIGNUP_SCREEN} from '../../navigation/routePaths';
+
+import styles from './styles';
+
+const LoginScreen = (props: {navigation: any}) => {
+  const {navigation} = props;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const resetPassword = () => {
+    console.log('password resetted');
+  };
+  const login = () => {
+    console.log('login success');
+  };
+  const signUp = () => {
+    navigation.navigate(SIGNUP_SCREEN);
+  };
+
   return (
-    <View>
-      <Text>LoginScreen</Text>
+    <View style={styles.mainContainer}>
+      <Titles title="Welcome" subTitle="Welcome to your portal" />
+      <View style={styles.inputContainer}>
+        <CustomTextInput
+          label={'Email'}
+          placeholder={'Please enter your email'}
+          onChangeText={setEmail}
+          mailInput={true}
+        />
+        <CustomTextInput
+          label={'Password'}
+          placeholder={'Please enter your password'}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+          doubleIcons={true}
+        />
+      </View>
+      <View style={styles.textButton}>
+        <TextButton buttonText="Restore password" onPress={resetPassword} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button buttonText="Login" onPress={login} />
+        <Button buttonText="Sign Up" onPress={signUp} />
+      </View>
     </View>
   );
 };

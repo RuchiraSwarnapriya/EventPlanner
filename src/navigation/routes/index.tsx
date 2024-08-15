@@ -6,7 +6,7 @@ import AuthStack from '../stacks/authStack';
 import AppStack from '../stacks/appStack';
 
 export default function MainRoute() {
-  const isSignedIn = true;
+  const isSignedIn = false;
   return (
     <NavigationContainer>
       {isSignedIn ? <AppStack /> : <AuthStack />}
