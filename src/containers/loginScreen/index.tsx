@@ -8,7 +8,10 @@ import Titles from '../../components/titles';
 
 import {SIGNUP_SCREEN} from '../../navigation/routePaths';
 
+import {login} from '../../redux/slices/auth';
+
 import styles from './styles';
+import {useDispatch} from 'react-redux';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -16,12 +19,19 @@ const LoginScreen = (props: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+
   const resetPassword = () => {
     console.log('password resetted');
   };
-  const login = () => {
-    console.log('login success');
+
+  const onLogin = () => {
+    const userData = {email: email, password: password};
+    dispatch(login(userData));
+    setEmail('');
+    setPassword('');
   };
+
   const signUp = () => {
     navigation.navigate(SIGNUP_SCREEN);
   };
@@ -34,6 +44,7 @@ const LoginScreen = (props: {navigation: any}) => {
           label={'Email'}
           placeholder={'Please enter your email'}
           onChangeText={setEmail}
+          value={email}
           mailInput={true}
         />
         <CustomTextInput
@@ -41,6 +52,7 @@ const LoginScreen = (props: {navigation: any}) => {
           placeholder={'Please enter your password'}
           onChangeText={setPassword}
           secureTextEntry={true}
+          value={password}
           doubleIcons={true}
         />
         <View style={styles.textButton}>
@@ -49,7 +61,7 @@ const LoginScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button buttonText="Login" onPress={login} />
+        <Button buttonText="Login" onPress={onLogin} />
         <Button buttonText="Sign Up" onPress={signUp} />
       </View>
     </View>

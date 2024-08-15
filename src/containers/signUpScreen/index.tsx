@@ -32,6 +32,7 @@ const SignUpScreen = (props: {navigation: any}) => {
           placeholder={'Please enter your email'}
           onChangeText={setEmail}
           mailInput={true}
+          value={email}
         />
         <CustomTextInput
           label={'Password'}
@@ -39,6 +40,7 @@ const SignUpScreen = (props: {navigation: any}) => {
           onChangeText={setPassword}
           secureTextEntry={true}
           doubleIcons={true}
+          value={password}
         />
         <CustomTextInput
           label={'Confirm Password'}
@@ -46,6 +48,7 @@ const SignUpScreen = (props: {navigation: any}) => {
           onChangeText={setConfirmPassword}
           secureTextEntry={true}
           doubleIcons={true}
+          value={confirmPassword}
         />
       </View>
       <View style={styles.buttonContainer}>
