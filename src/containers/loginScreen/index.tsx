@@ -18,7 +18,7 @@ import CustomTextInput from '../../components/customTextInput';
 import TextButton from '../../components/buttons/textButton';
 import Titles from '../../components/titles';
 
-import {SIGNUP_SCREEN} from '../../navigation/routePaths';
+import {SIGNUP_SCREEN, WELCOME_SCREEN} from '../../navigation/routePaths';
 
 import styles from './styles';
 
@@ -61,11 +61,13 @@ const LoginScreen = (props: {navigation: any}) => {
   };
 
   const onLogin = async () => {
-    if (validateForm()) {
-      dispatch(login(email, password));
-      setEmail('');
-      setPassword('');
-    }
+    // if (validateForm()) {
+    //   dispatch(login(email, password));
+    //   setEmail('');
+    //   setPassword('');
+    //   navigation.navigate(WELCOME_SCREEN);
+    // }
+    navigation.navigate(WELCOME_SCREEN);
   };
 
   const signUp = () => {
