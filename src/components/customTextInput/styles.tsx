@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
+    marginHorizontal: 1,
   },
   subInputContainer: {
     flexDirection: 'row',
@@ -38,5 +38,14 @@ export default StyleSheet.create({
   },
   seconIcon: {
     marginRight: 10,
+  },
+  errorText: {
+    alignSelf: 'flex-end',
+    textAlign: 'right',
+    marginRight: 5,
+    marginBottom: -10,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.red,
   },
 });
