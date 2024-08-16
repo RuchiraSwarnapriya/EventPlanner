@@ -13,15 +13,25 @@ type Props = {
   reverse?: boolean;
   isLoading?: boolean;
   disabled?: boolean;
+  buttonWidth?: number;
 };
 
 const Button: React.FC<Props> = props => {
-  const {buttonText, onPress, reverse, isLoading, disabled} = props;
+  const {buttonText, onPress, reverse, isLoading, disabled, buttonWidth} =
+    props;
   return (
     <TouchableOpacity
       style={[
         styles.mainContainer,
-        {backgroundColor: disabled ? Colors.grey : Colors.red},
+        // eslint-disable-next-line react-native/no-inline-styles
+        {
+          backgroundColor: disabled
+            ? Colors.grey
+            : reverse
+            ? Colors.pink
+            : Colors.red,
+          width: buttonWidth ? buttonWidth : 342,
+        },
       ]}
       onPress={onPress}
       disabled={disabled}>

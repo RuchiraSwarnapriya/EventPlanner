@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import {validateEmail} from '../../utils/validators';
+import {useDispatch} from 'react-redux';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -16,10 +16,16 @@ import Titles from '../../components/titles';
 
 import {LOGIN_SCREEN} from '../../navigation/routePaths';
 
+import {signUp} from '../../redux/actions/auth';
+
+import {validateEmail} from '../../utils/validators';
+
 import styles from './styles';
 
 const SignUpScreen = (props: {navigation: any}) => {
   const {navigation} = props;
+
+  const dispatch: any = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -65,13 +71,14 @@ const SignUpScreen = (props: {navigation: any}) => {
     navigation.navigate(LOGIN_SCREEN);
   };
 
-  const signUp = () => {
-    if (validateForm()) {
-      console.log('signup Success');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-    }
+  const onSignUp = () => {
+    // if (validateForm()) {
+    //   console.log('signup Success');
+    //   setEmail('');
+    //   setPassword('');
+    //   setConfirmPassword('');
+    // }
+    dispatch(signUp(email, password, confirmPassword));
   };
 
   return (
@@ -125,7 +132,7 @@ const SignUpScreen = (props: {navigation: any}) => {
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Button buttonText="Sign Up" onPress={signUp} />
+              <Button buttonText="Sign Up" onPress={onSignUp} />
               <Button buttonText="Login" onPress={login} />
             </View>
           </View>

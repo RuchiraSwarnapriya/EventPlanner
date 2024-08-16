@@ -12,10 +12,11 @@ export const fetchItemList = () => {
   return async (dispatch: any) => {
     try {
       await dispatch(getItemList());
-      await dispatch(setItemList());
+      await dispatch(setItemList({}));
       return true;
     } catch (error) {
       console.log(error);
+      await dispatch(setItemList({}));
       return false;
     }
   };

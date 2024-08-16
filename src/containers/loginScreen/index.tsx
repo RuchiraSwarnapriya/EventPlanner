@@ -9,16 +9,16 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {login} from '../../redux/actions/auth';
-
-import {validateEmail} from '../../utils/validators';
-
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
 import TextButton from '../../components/buttons/textButton';
 import Titles from '../../components/titles';
 
-import {SIGNUP_SCREEN, WELCOME_SCREEN} from '../../navigation/routePaths';
+import {SIGNUP_SCREEN} from '../../navigation/routePaths';
+
+import {login} from '../../redux/actions/auth';
+
+import {validateEmail} from '../../utils/validators';
 
 import styles from './styles';
 
@@ -67,7 +67,7 @@ const LoginScreen = (props: {navigation: any}) => {
     //   setPassword('');
     //   navigation.navigate(WELCOME_SCREEN);
     // }
-    navigation.navigate(WELCOME_SCREEN);
+    dispatch(login(email, password));
   };
 
   const signUp = () => {
