@@ -17,6 +17,7 @@ type Props = {
   mailInput?: boolean;
   doubleIcons?: boolean;
   showPassword?: boolean;
+  errorText?: string;
 };
 
 const CustomTextInput: React.FC<Props> = props => {
@@ -29,6 +30,7 @@ const CustomTextInput: React.FC<Props> = props => {
     keyboardType,
     mailInput,
     doubleIcons,
+    errorText,
   } = props;
 
   const [isVisible, setIsVisible] = useState(secureTextEntry);
@@ -69,6 +71,11 @@ const CustomTextInput: React.FC<Props> = props => {
           </TouchableOpacity>
         )}
       </View>
+      {errorText ? (
+        <Text style={styles.errorText}>{errorText}</Text>
+      ) : (
+        <Text style={styles.errorText}>{''}</Text>
+      )}
     </View>
   );
 };

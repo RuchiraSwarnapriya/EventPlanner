@@ -5,7 +5,10 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from 'react-native';
+
+import {validateEmail} from '../../utils/validators';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -14,7 +17,6 @@ import Titles from '../../components/titles';
 import {LOGIN_SCREEN} from '../../navigation/routePaths';
 
 import styles from './styles';
-import {ScrollView} from 'react-native-gesture-handler';
 
 const SignUpScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -22,12 +24,54 @@ const SignUpScreen = (props: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  const validateForm = () => {
+    let valid = true;
+
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    } else if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (!confirmPassword) {
+      setConfirmPasswordError('Confrim Password is required');
+      valid = false;
+    } else if (password !== confirmPassword) {
+      setConfirmPasswordError('Passwords are not matching');
+      valid = false;
+    } else {
+      setConfirmPasswordError('');
+    }
+
+    return valid;
+  };
 
   const login = () => {
     navigation.navigate(LOGIN_SCREEN);
   };
+
   const signUp = () => {
-    console.log('signup Success');
+    if (validateForm()) {
+      console.log('signup Success');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    }
   };
 
   return (
@@ -41,25 +85,43 @@ const SignUpScreen = (props: {navigation: any}) => {
               <CustomTextInput
                 label={'Email'}
                 placeholder={'Please enter your email'}
-                onChangeText={setEmail}
+                onChangeText={(text: string) => {
+                  setEmail(text);
+                  if (emailError) {
+                    setEmailError('');
+                  }
+                }}
                 mailInput={true}
                 value={email}
+                errorText={emailError}
               />
               <CustomTextInput
                 label={'Password'}
                 placeholder={'Please enter your password'}
-                onChangeText={setPassword}
+                onChangeText={(text: string) => {
+                  setPassword(text);
+                  if (passwordError) {
+                    setPasswordError('');
+                  }
+                }}
                 secureTextEntry={true}
                 doubleIcons={true}
                 value={password}
+                errorText={passwordError}
               />
               <CustomTextInput
                 label={'Confirm Password'}
                 placeholder={'Please enter your password again'}
-                onChangeText={setConfirmPassword}
+                onChangeText={(text: string) => {
+                  setConfirmPassword(text);
+                  if (confirmPasswordError) {
+                    setConfirmPasswordError('');
+                  }
+                }}
                 secureTextEntry={true}
                 doubleIcons={true}
                 value={confirmPassword}
+                errorText={confirmPasswordError}
               />
             </View>
             <View style={styles.buttonContainer}>

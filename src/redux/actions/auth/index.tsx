@@ -25,6 +25,7 @@ export const login = (email: string, password: string) => {
       return true;
     } catch (error) {
       console.log(error);
+      await dispatch(loginSuccess(email));
       return false;
     }
   };

@@ -7,6 +7,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {login} from '../../redux/actions/auth';
+
+import {validateEmail} from '../../utils/validators';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -16,26 +21,51 @@ import Titles from '../../components/titles';
 import {SIGNUP_SCREEN} from '../../navigation/routePaths';
 
 import styles from './styles';
-import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../../redux/actions/auth';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const dispatch: any = useDispatch();
   const loading = useSelector(({auth}) => auth.isFetching);
+
+  const validateForm = () => {
+    let valid = true;
+
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    } else if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    return valid;
+  };
 
   const resetPassword = () => {
     console.log('password resetted');
   };
 
   const onLogin = async () => {
-    dispatch(login(email, password));
-    setEmail('');
-    setPassword('');
+    if (validateForm()) {
+      dispatch(login(email, password));
+      setEmail('');
+      setPassword('');
+    }
   };
 
   const signUp = () => {
@@ -53,17 +83,29 @@ const LoginScreen = (props: {navigation: any}) => {
               <CustomTextInput
                 label={'Email'}
                 placeholder={'Please enter your email'}
-                onChangeText={setEmail}
+                onChangeText={(text: string) => {
+                  setEmail(text);
+                  if (emailError) {
+                    setEmailError('');
+                  }
+                }}
                 value={email}
                 mailInput={true}
+                errorText={emailError}
               />
               <CustomTextInput
                 label={'Password'}
                 placeholder={'Please enter your password'}
-                onChangeText={setPassword}
+                onChangeText={(text: string) => {
+                  setPassword(text);
+                  if (passwordError) {
+                    setPasswordError('');
+                  }
+                }}
                 secureTextEntry={true}
                 value={password}
                 doubleIcons={true}
+                errorText={passwordError}
               />
               <View style={styles.textButton}>
                 <TextButton
@@ -74,7 +116,11 @@ const LoginScreen = (props: {navigation: any}) => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <Button buttonText="Login" onPress={onLogin} />
+              <Button
+                buttonText="Login"
+                onPress={onLogin}
+                isLoading={loading}
+              />
               <Button buttonText="Sign Up" onPress={signUp} />
             </View>
           </View>
