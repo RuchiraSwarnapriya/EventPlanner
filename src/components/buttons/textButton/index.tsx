@@ -1,21 +1,30 @@
 import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-import AngledArrow from '../../../assets/icons/angledArrow.svg';
-
 import styles from './styles';
 
 type Props = {
   buttonText: string;
   onPress: () => void;
+  icon?: any;
+  reverse?: boolean;
 };
 
 const TextButton: React.FC<Props> = props => {
-  const {buttonText, onPress} = props;
+  const {buttonText, onPress, icon, reverse} = props;
   return (
     <TouchableOpacity style={styles.mainContainer} onPress={onPress}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
-      <AngledArrow />
+      {reverse ? (
+        <>
+          {icon}
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </>
+      ) : (
+        <>
+          <Text style={styles.buttonText}>{buttonText}</Text>
+          {icon}
+        </>
+      )}
     </TouchableOpacity>
   );
 };

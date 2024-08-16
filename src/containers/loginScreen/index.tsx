@@ -20,6 +20,12 @@ import {login} from '../../redux/actions/auth';
 
 import {validateEmail} from '../../utils/validators';
 
+import AngledArrow from '../../assets/icons/angledArrow.svg';
+import RightArrow from '../../assets/icons/rightArrow.svg';
+import MailIcon from '../../assets/icons/email.svg';
+import PasswordIcon from '../../assets/icons/lock.svg';
+import EyeIcon from '../../assets/icons/eye.svg';
+
 import styles from './styles';
 
 const LoginScreen = (props: {navigation: any}) => {
@@ -92,7 +98,7 @@ const LoginScreen = (props: {navigation: any}) => {
                   }
                 }}
                 value={email}
-                mailInput={true}
+                iconOne={<MailIcon />}
                 errorText={emailError}
               />
               <CustomTextInput
@@ -106,13 +112,15 @@ const LoginScreen = (props: {navigation: any}) => {
                 }}
                 secureTextEntry={true}
                 value={password}
-                doubleIcons={true}
+                iconOne={<PasswordIcon />}
+                iconTwo={<EyeIcon />}
                 errorText={passwordError}
               />
               <View style={styles.textButton}>
                 <TextButton
                   buttonText="Restore password"
                   onPress={resetPassword}
+                  icon={<AngledArrow />}
                 />
               </View>
             </View>
@@ -122,8 +130,13 @@ const LoginScreen = (props: {navigation: any}) => {
                 buttonText="Login"
                 onPress={onLogin}
                 isLoading={loading}
+                icon={<RightArrow />}
               />
-              <Button buttonText="Sign Up" onPress={signUp} />
+              <Button
+                buttonText="Sign Up"
+                onPress={signUp}
+                icon={<RightArrow />}
+              />
             </View>
           </View>
         </ScrollView>

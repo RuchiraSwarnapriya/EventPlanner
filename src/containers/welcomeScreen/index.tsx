@@ -9,6 +9,9 @@ import Titles from '../../components/titles';
 
 import {PERSONAL_INFO_SCREEN} from '../../navigation/routePaths';
 
+import RightArrow from '../../assets/icons/rightArrow.svg';
+import RedCamIcon from '../../assets/icons/redCam.svg';
+
 import styles from './styles';
 
 const WelcomScreen = (props: {navigation: any}) => {
@@ -38,10 +41,10 @@ const WelcomScreen = (props: {navigation: any}) => {
         subTitle="You are logged in for the first time and can upload a profile photo"
       />
       <TouchableOpacity style={styles.camera} onPress={onOpenCamera}>
-        <CircleImageViewer imageSource={imagePath} />
+        <CircleImageViewer imageSource={imagePath} icon={<RedCamIcon />} />
       </TouchableOpacity>
       <View style={styles.buttonContiner}>
-        <Button buttonText="Next" onPress={onNext} />
+        <Button buttonText="Next" onPress={onNext} icon={<RightArrow />} />
       </View>
     </View>
   );

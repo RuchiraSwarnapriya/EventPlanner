@@ -1,20 +1,34 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 
-import {PROFILE_SCREEN} from '../../navigation/routePaths';
+import ProfileCard from '../profileCard';
+import TextButton from '../buttons/textButton';
 
-const HomeDrawer = (props: {navigation: any}) => {
-  const {navigation} = props;
+import LogoutIcon from '../../assets/icons/logout.svg';
 
-  const onNvaigateProfile = () => {
-    navigation.navigate(PROFILE_SCREEN);
+import styles from './styles';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/actions/auth';
+
+const HomeDrawer = () => {
+  const dispatch: any = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+    console.log('Logout');
   };
 
   return (
     <View>
-      <TouchableOpacity onPress={onNvaigateProfile}>
-        <Text>Profile</Text>
-      </TouchableOpacity>
+      <ProfileCard />
+      <View style={styles.buttonContainer}>
+        <TextButton
+          buttonText="Logout"
+          onPress={onLogout}
+          icon={<LogoutIcon />}
+          reverse={true}
+        />
+      </View>
     </View>
   );
 };

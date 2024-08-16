@@ -25,7 +25,7 @@ const ProfileScreen = (props: {navigation: any}) => {
         <CustomTextBox label="Phone number" value={'email'} />
         <CustomTextBox label="Mailing address" value={'email'} />
       </ScrollView>
-      <Button buttonText="Edit" onPress={onEdit} noIcon={true} />
+      <Button buttonText="Edit" onPress={onEdit} />
     </View>
   );
 };

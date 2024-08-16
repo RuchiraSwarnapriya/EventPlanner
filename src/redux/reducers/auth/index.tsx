@@ -1,10 +1,11 @@
-import {HOME, INFO} from '../../../utils/constants';
+import {AUTH, HOME, INFO} from '../../../utils/constants';
 import {
   FLOW_COMPLETED,
   GET_LOGIN_DATA,
   GET_SIGNUP_DATA,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
 } from '../../actionTypes/auth';
@@ -27,6 +28,17 @@ const authReducer = (state = initialState, action: any) => {
         isLoginLoading: false,
         loginData: action.payload,
         tempAppState: HOME,
+      };
+    case LOGIN_FAILED:
+      return {...state, isLoginLoading: false, tempAppState: ''};
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoginLoading: false,
+        isSignUpLoading: false,
+        signUpData: '',
+        loginData: '',
+        tempAppState: AUTH,
       };
     case LOGIN_FAILED:
       return {...state, isLoginLoading: false, tempAppState: ''};

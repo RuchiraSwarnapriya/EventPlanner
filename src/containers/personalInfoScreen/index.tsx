@@ -16,6 +16,8 @@ import Button from '../../components/buttons/solidButton';
 
 import {flowCompleted} from '../../redux/actions/auth';
 
+import RightArrow from '../../assets/icons/rightArrow.svg';
+
 import styles from './styles';
 
 const PersonalInfoScreen = (props: {navigation: any}) => {
@@ -92,7 +94,12 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
                 buttonWidth={166}
                 reverse={true}
               />
-              <Button buttonText="Next" onPress={onNext} buttonWidth={166} />
+              <Button
+                buttonText="Next"
+                onPress={onNext}
+                buttonWidth={166}
+                icon={<RightArrow />}
+              />
             </View>
           </View>
         </ScrollView>

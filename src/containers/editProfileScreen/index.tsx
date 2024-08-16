@@ -15,6 +15,8 @@ import Button from '../../components/buttons/solidButton';
 import CircleImageViewer from '../../components/circleImageViewer';
 import CustomTextInput from '../../components/customTextInput';
 
+import WhiteCamIcon from '../../assets/icons/whiteCam.svg';
+
 import styles from './styles';
 
 const EditProfileScreen = () => {
@@ -49,35 +51,34 @@ const EditProfileScreen = () => {
             <TouchableOpacity
               style={styles.imageContainer}
               onPress={onOpenCamera}>
-              <CircleImageViewer imageSource={imagePath} />
+              <CircleImageViewer
+                imageSource={imagePath}
+                icon={<WhiteCamIcon />}
+              />
             </TouchableOpacity>
             <View style={styles.inputContainer}>
               <CustomTextInput
                 label={'First Name'}
                 placeholder={'Please enter your first name'}
                 onChangeText={setFirstName}
-                mailInput={false}
                 value={firstName}
               />
               <CustomTextInput
                 label={'Last Name'}
                 placeholder={'Please enter your last name'}
                 onChangeText={setLastName}
-                mailInput={false}
                 value={lastName}
               />
               <CustomTextInput
                 label={'Email'}
                 placeholder={'Please enter your email'}
                 onChangeText={setEmail}
-                mailInput={false}
                 value={email}
               />
               <CustomTextInput
                 label={'Phone number'}
                 placeholder={'Please enter your phone number'}
                 onChangeText={setPhoneNum}
-                mailInput={false}
                 value={phoneNum}
                 keyboardType="numeric"
               />
@@ -85,12 +86,11 @@ const EditProfileScreen = () => {
                 label={'Mailing address'}
                 placeholder={'Please enter your mailing address'}
                 onChangeText={setAddress}
-                mailInput={false}
                 value={address}
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Button buttonText="Save" onPress={onSave} noIcon={true} />
+              <Button buttonText="Save" onPress={onSave} />
             </View>
           </View>
         </ScrollView>

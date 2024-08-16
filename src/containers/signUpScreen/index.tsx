@@ -20,6 +20,11 @@ import {signUp} from '../../redux/actions/auth';
 
 import {validateEmail} from '../../utils/validators';
 
+import RightArrow from '../../assets/icons/rightArrow.svg';
+import MailIcon from '../../assets/icons/email.svg';
+import PasswordIcon from '../../assets/icons/lock.svg';
+import EyeIcon from '../../assets/icons/eye.svg';
+
 import styles from './styles';
 
 const SignUpScreen = (props: {navigation: any}) => {
@@ -98,7 +103,7 @@ const SignUpScreen = (props: {navigation: any}) => {
                     setEmailError('');
                   }
                 }}
-                mailInput={true}
+                iconOne={<MailIcon />}
                 value={email}
                 errorText={emailError}
               />
@@ -112,7 +117,8 @@ const SignUpScreen = (props: {navigation: any}) => {
                   }
                 }}
                 secureTextEntry={true}
-                doubleIcons={true}
+                iconOne={<PasswordIcon />}
+                iconTwo={<EyeIcon />}
                 value={password}
                 errorText={passwordError}
               />
@@ -126,14 +132,23 @@ const SignUpScreen = (props: {navigation: any}) => {
                   }
                 }}
                 secureTextEntry={true}
-                doubleIcons={true}
+                iconOne={<PasswordIcon />}
+                iconTwo={<EyeIcon />}
                 value={confirmPassword}
                 errorText={confirmPasswordError}
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Button buttonText="Sign Up" onPress={onSignUp} />
-              <Button buttonText="Login" onPress={login} />
+              <Button
+                buttonText="Sign Up"
+                onPress={onSignUp}
+                icon={<RightArrow />}
+              />
+              <Button
+                buttonText="Login"
+                onPress={login}
+                icon={<RightArrow />}
+              />
             </View>
           </View>
         </ScrollView>

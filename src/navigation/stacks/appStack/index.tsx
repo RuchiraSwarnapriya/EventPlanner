@@ -10,11 +10,12 @@ import HomeDrawer from '../../../components/drawer';
 
 export default function AppStack() {
   const Drawer = createDrawerNavigator();
+
   return (
     <Drawer.Navigator
       initialRouteName={MAIN_TABS}
       screenOptions={{headerShown: false}}
-      drawerContent={props => <HomeDrawer {...props} />}>
+      drawerContent={() => <HomeDrawer />}>
       <Drawer.Screen name={MAIN_TABS} component={MainTabs} />
     </Drawer.Navigator>
   );

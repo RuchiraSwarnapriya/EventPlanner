@@ -15,15 +15,15 @@ export default StyleSheet.create({
   },
   inputContainer: {
     alignItems: 'center',
-    marginTop: 25,
+    marginHorizontal: 25,
   },
   buttonContainer: {
     position: 'absolute',
-    bottom: 50,
-    width: '100%',
+    bottom: 0,
     alignSelf: 'center',
     flexDirection: 'row',
     paddingHorizontal: 5,
+
     justifyContent: 'space-between',
   },
 });

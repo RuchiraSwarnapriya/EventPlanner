@@ -4,6 +4,7 @@ import {
   GET_SIGNUP_DATA,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
 } from '../../actionTypes/auth';
@@ -18,6 +19,10 @@ export const loginSuccess = (payload: {}) => {
 
 export const loginFalied = () => {
   return {type: LOGIN_FAILED};
+};
+
+export const logout = () => {
+  return {type: LOGOUT_SUCCESS};
 };
 
 export const getSignUpData = () => {

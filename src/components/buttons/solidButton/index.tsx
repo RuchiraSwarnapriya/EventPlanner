@@ -1,11 +1,10 @@
-import {ActivityIndicator, Text, TouchableOpacity} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 
-import RightArrow from '../../../assets/icons/rightArrow.svg';
-import LeftArrow from '../../../assets/icons/leftArrow.svg';
+import {Colors} from '../../../assets/colors';
 
 import styles from './styles';
-import {Colors} from '../../../assets/colors';
 
 type Props = {
   buttonText: string;
@@ -14,24 +13,16 @@ type Props = {
   isLoading?: boolean;
   disabled?: boolean;
   buttonWidth?: number;
-  noIcon?: boolean;
+  icon?: any;
 };
 
 const Button: React.FC<Props> = props => {
-  const {
-    buttonText,
-    onPress,
-    reverse,
-    isLoading,
-    disabled,
-    buttonWidth,
-    noIcon,
-  } = props;
+  const {buttonText, onPress, reverse, isLoading, disabled, buttonWidth, icon} =
+    props;
   return (
     <TouchableOpacity
       style={[
         styles.mainContainer,
-        // eslint-disable-next-line react-native/no-inline-styles
         {
           backgroundColor: disabled
             ? Colors.grey
@@ -45,17 +36,15 @@ const Button: React.FC<Props> = props => {
       disabled={disabled}>
       {isLoading ? (
         <ActivityIndicator size={20} color={Colors.white} />
-      ) : noIcon ? (
-        <Text style={styles.buttonText}>{buttonText}</Text>
       ) : reverse ? (
         <>
-          <LeftArrow />
+          {icon}
           <Text style={[styles.reversebuttonText]}>{buttonText}</Text>
         </>
       ) : (
         <>
           <Text style={styles.buttonText}>{buttonText}</Text>
-          <RightArrow />
+          {icon}
         </>
       )}
     </TouchableOpacity>
