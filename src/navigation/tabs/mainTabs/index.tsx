@@ -2,9 +2,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {HOME_STACK, PROFILE_SCREEN} from '../../routePaths';
-
-import ProfileScreen from '../../../containers/profileScreen';
+import {HOME_STACK, PROFILE_STACK} from '../../routePaths';
 
 import HomeStack from '../../stacks/homeStack';
 
@@ -12,6 +10,7 @@ import {Colors} from '../../../assets/colors';
 
 import HomeIcon from '../../../assets/icons/home.svg';
 import ProfileIcon from '../../../assets/icons/profile.svg';
+import ProfileStack from '../../stacks/profileStack';
 
 export default function MainTabs() {
   const Tab = createBottomTabNavigator();
@@ -33,8 +32,8 @@ export default function MainTabs() {
         }}
       />
       <Tab.Screen
-        name={PROFILE_SCREEN}
-        component={ProfileScreen}
+        name={PROFILE_STACK}
+        component={ProfileStack}
         options={{
           tabBarIcon: () => {
             return <ProfileIcon />;

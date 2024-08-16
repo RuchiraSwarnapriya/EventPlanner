@@ -10,3 +10,4 @@ export const HOME_DRAWER = 'HomeDrawer';
 export const HOME_SCREEN = 'HomeScreen';
 export const POSTS_SCREEN = 'PostsScreen';
 export const PROFILE_SCREEN = 'ProfileScreen';
+export const EDIT_PROFILE_SCREEN = 'EditProfileScreen';
