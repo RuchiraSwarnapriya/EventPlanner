@@ -15,10 +15,9 @@ import Titles from '../../components/titles';
 
 import {SIGNUP_SCREEN} from '../../navigation/routePaths';
 
-import {login} from '../../redux/slices/auth';
-
 import styles from './styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../../redux/actions/auth';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -26,15 +25,15 @@ const LoginScreen = (props: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
+  const loading = useSelector(({auth}) => auth.isFetching);
 
   const resetPassword = () => {
     console.log('password resetted');
   };
 
-  const onLogin = () => {
-    const userData = {email: email, password: password};
-    dispatch(login(userData));
+  const onLogin = async () => {
+    dispatch(login(email, password));
     setEmail('');
     setPassword('');
   };
