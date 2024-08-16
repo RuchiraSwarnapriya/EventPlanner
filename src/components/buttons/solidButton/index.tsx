@@ -14,11 +14,19 @@ type Props = {
   isLoading?: boolean;
   disabled?: boolean;
   buttonWidth?: number;
+  noIcon?: boolean;
 };
 
 const Button: React.FC<Props> = props => {
-  const {buttonText, onPress, reverse, isLoading, disabled, buttonWidth} =
-    props;
+  const {
+    buttonText,
+    onPress,
+    reverse,
+    isLoading,
+    disabled,
+    buttonWidth,
+    noIcon,
+  } = props;
   return (
     <TouchableOpacity
       style={[
@@ -37,6 +45,8 @@ const Button: React.FC<Props> = props => {
       disabled={disabled}>
       {isLoading ? (
         <ActivityIndicator size={20} color={Colors.white} />
+      ) : noIcon ? (
+        <Text style={styles.buttonText}>{buttonText}</Text>
       ) : reverse ? (
         <>
           <LeftArrow />

@@ -9,10 +9,15 @@ import {EDIT_PROFILE_SCREEN, PROFILE_SCREEN} from '../../routePaths';
 export default function ProfileStack() {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator
-      initialRouteName={PROFILE_SCREEN}
-      screenOptions={{headerShown: false}}>
-      <Stack.Screen name={PROFILE_SCREEN} component={ProfileScreen} />
+    <Stack.Navigator initialRouteName={PROFILE_SCREEN}>
+      <Stack.Screen
+        name={PROFILE_SCREEN}
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          headerTitleAlign: 'center',
+        }}
+      />
       <Stack.Screen name={EDIT_PROFILE_SCREEN} component={EditProfileScreen} />
     </Stack.Navigator>
   );

@@ -6,4 +6,5 @@ export const Colors = {
   darkGrey: '#444749',
   lightGrey: '#757779',
   pink: '#F1E6E3',
+  powederWhite: '#EBF3F6',
 };
