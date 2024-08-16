@@ -13,6 +13,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginHorizontal: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lightGrey,
   },
   subInputContainer: {
     flexDirection: 'row',
