@@ -28,10 +28,10 @@ export default StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
     bottom: 50,
-    width: '100%',
+    width: Dimensions.get('window').width,
     alignSelf: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 5,
+    paddingHorizontal: 25,
     justifyContent: 'space-between',
   },
 });

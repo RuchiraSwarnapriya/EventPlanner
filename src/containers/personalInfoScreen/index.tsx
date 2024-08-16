@@ -17,6 +17,7 @@ import Button from '../../components/buttons/solidButton';
 import {flowCompleted} from '../../redux/actions/auth';
 
 import RightArrow from '../../assets/icons/rightArrow.svg';
+import LeftArrow from '../../assets/icons/leftArrow.svg';
 
 import styles from './styles';
 
@@ -54,28 +55,24 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
                 label={'First Name'}
                 placeholder={'Please enter your first name'}
                 onChangeText={setFirstName}
-                mailInput={false}
                 value={firstName}
               />
               <CustomTextInput
                 label={'Last Name'}
                 placeholder={'Please enter your last name'}
                 onChangeText={setLastName}
-                mailInput={false}
                 value={lastName}
               />
               <CustomTextInput
                 label={'Email'}
                 placeholder={'Please enter your email'}
                 onChangeText={setEmail}
-                mailInput={false}
                 value={email}
               />
               <CustomTextInput
                 label={'Phone number'}
                 placeholder={'Please enter your phone number'}
                 onChangeText={setPhoneNum}
-                mailInput={false}
                 value={phoneNum}
                 keyboardType="numeric"
               />
@@ -83,7 +80,6 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
                 label={'Mailing address'}
                 placeholder={'Please enter your mailing address'}
                 onChangeText={setAddress}
-                mailInput={false}
                 value={address}
               />
             </View>
@@ -93,6 +89,7 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
                 onPress={goBack}
                 buttonWidth={166}
                 reverse={true}
+                icon={<LeftArrow />}
               />
               <Button
                 buttonText="Next"
