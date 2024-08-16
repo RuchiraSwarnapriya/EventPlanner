@@ -15,6 +15,7 @@ const WelcomScreen = (props: {navigation: any}) => {
   const {navigation} = props;
 
   const [imagePath, setImagePath] = useState('');
+
   const onNext = () => {
     navigation.navigate(PERSONAL_INFO_SCREEN);
   };

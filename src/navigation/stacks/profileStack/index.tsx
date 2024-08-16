@@ -18,7 +18,14 @@ export default function ProfileStack() {
           headerTitleAlign: 'center',
         }}
       />
-      <Stack.Screen name={EDIT_PROFILE_SCREEN} component={EditProfileScreen} />
+      <Stack.Screen
+        name={EDIT_PROFILE_SCREEN}
+        component={EditProfileScreen}
+        options={{
+          title: 'Edit Profile',
+          headerTitleAlign: 'center',
+        }}
+      />
     </Stack.Navigator>
   );
 }
