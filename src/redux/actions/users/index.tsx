@@ -1,0 +1,26 @@
+import HomeService from '../../../services/homeService';
+import {GET_USERS, SET_USERS} from '../../actionTypes/users';
+
+export const getUsers = () => {
+  return {type: GET_USERS};
+};
+
+export const setUsers = (payload: {}) => {
+  return {type: SET_USERS, payload};
+};
+
+export const fetchUsers = () => {
+  return async (dispatch: any) => {
+    try {
+      await dispatch(getUsers());
+      const response: any = await HomeService.users();
+      console.log(response.slice(0, 10));
+      await dispatch(setUsers(response || {}));
+      return true;
+    } catch (error) {
+      console.log(error);
+      await dispatch(setUsers({}));
+      return false;
+    }
+  };
+};

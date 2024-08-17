@@ -6,7 +6,7 @@ import {MAIN_TABS} from '../../routePaths';
 
 import MainTabs from '../../tabs/mainTabs';
 
-import HomeDrawer from '../../../components/drawer';
+import HomeDrawer from '../../../containers/drawer';
 
 export default function AppStack() {
   const Drawer = createDrawerNavigator();

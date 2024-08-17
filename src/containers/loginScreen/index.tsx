@@ -27,6 +27,7 @@ import PasswordIcon from '../../assets/icons/lock.svg';
 import EyeIcon from '../../assets/icons/eye.svg';
 
 import styles from './styles';
+import {fetchImages} from '../../redux/actions/images';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -73,7 +74,8 @@ const LoginScreen = (props: {navigation: any}) => {
     //   setPassword('');
     //   navigation.navigate(WELCOME_SCREEN);
     // }
-    dispatch(login(email, password));
+    // dispatch(login(email, password));
+    await dispatch(fetchImages());
   };
 
   const signUp = () => {

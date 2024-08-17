@@ -1,8 +1,14 @@
 import {combineReducers} from 'redux';
 import authReducer from './auth';
-import itemsReducer from './itemList';
+import imageReducer from './images';
+import usersReducer from './users';
+import postsReducer from './posts';
+import commentsReducer from './comments';
 
 export default combineReducers({
   auth: authReducer,
-  items: itemsReducer,
+  images: imageReducer,
+  users: usersReducer,
+  posts: postsReducer,
+  comments: commentsReducer,
 });
