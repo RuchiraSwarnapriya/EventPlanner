@@ -20,7 +20,7 @@ const HomeDrawer = () => {
 
   return (
     <View>
-      <ProfileCard />
+      <ProfileCard name="name" email="email" imageUri={''} />
       <View style={styles.buttonContainer}>
         <TextButton
           buttonText="Logout"

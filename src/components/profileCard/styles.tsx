@@ -28,4 +28,13 @@ export default StyleSheet.create({
     fontWeight: '400',
     color: Colors.lightGrey,
   },
+  initialsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  initials: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });

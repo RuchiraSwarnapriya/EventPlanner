@@ -98,7 +98,7 @@ const HomeScreen = (props: {navigation: any}) => {
         <Text style={styles.orgTitle}>Organizers</Text>
         {usersData.map((user: Users, index: number) => (
           <View key={index} style={styles.profileContainer}>
-            <ProfileCard name={user.name} email={user.email} />
+            <ProfileCard name={user.name} email={user.email} imageUri={''} />
             <View style={styles.commentContainer}>
               <CommentIcon />
             </View>
