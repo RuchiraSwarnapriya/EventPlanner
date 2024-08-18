@@ -5,8 +5,6 @@ import {Endpoint} from '../constants/types';
 
 const ROOT_ENDPOINT = Config.APP_API_BASE;
 
-console.log(ROOT_ENDPOINT);
-
 export class BaseService {
   private authAction: any;
 
@@ -51,11 +49,9 @@ export class BaseService {
     // iOS simulator complains if data is empty object.
     if (body !== null && Object.values(body).length > 0) {
       params.data = body;
-      console.log(params.data);
     }
 
     return axios(params).catch(error => {
-      console.log(error);
       return Promise.reject(error);
     });
   }

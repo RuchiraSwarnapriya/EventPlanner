@@ -14,11 +14,9 @@ export const fetchUsers = () => {
     try {
       await dispatch(getUsers());
       const response: any = await HomeService.users();
-      console.log(response.slice(0, 10));
       await dispatch(setUsers(response || {}));
       return true;
     } catch (error) {
-      console.log(error);
       await dispatch(setUsers({}));
       return false;
     }

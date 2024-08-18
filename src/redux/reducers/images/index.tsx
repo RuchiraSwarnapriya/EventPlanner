@@ -2,7 +2,7 @@ import {GET_IMAGES, SET_IMAGES} from '../../actionTypes/images';
 
 export const initialState = {
   isFetching: false,
-  imagesData: {},
+  imagesData: [],
 };
 
 const imageReducer = (state = initialState, action: any) => {

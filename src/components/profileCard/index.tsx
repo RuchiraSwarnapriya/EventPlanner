@@ -2,13 +2,20 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 import styles from './styles';
 
-const ProfileCard = () => {
+type Props = {
+  name?: string;
+  email?: any;
+  imageUri?: any;
+};
+
+const ProfileCard: React.FC<Props> = props => {
+  const {name, email, imageUri} = props;
   return (
     <View style={styles.mainContainer}>
-      <Image source={{uri: ''}} style={styles.image} />
+      <Image source={{uri: imageUri}} style={styles.image} />
       <View>
-        <Text style={styles.name}>name</Text>
-        <Text style={styles.email}>email</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.email}>{email}</Text>
       </View>
     </View>
   );

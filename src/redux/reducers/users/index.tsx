@@ -2,7 +2,7 @@ import {GET_USERS, SET_USERS} from '../../actionTypes/users';
 
 export const initialState = {
   isFetching: false,
-  usersData: {},
+  usersData: [],
 };
 
 const usersReducer = (state = initialState, action: any) => {

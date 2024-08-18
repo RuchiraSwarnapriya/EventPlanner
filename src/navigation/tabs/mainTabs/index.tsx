@@ -3,7 +3,12 @@ import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
-import {EDIT_PROFILE_SCREEN, HOME_STACK, PROFILE_STACK} from '../../routePaths';
+import {
+  EDIT_PROFILE_SCREEN,
+  HOME_STACK,
+  POSTS_SCREEN,
+  PROFILE_STACK,
+} from '../../routePaths';
 
 import HomeStack from '../../stacks/homeStack';
 import ProfileStack from '../../stacks/profileStack';
@@ -29,6 +34,12 @@ export default function MainTabs() {
       <Tab.Screen
         name={HOME_STACK}
         component={HomeStack}
+        listeners={({route}) => ({
+          state: () => {
+            const subRoute = getFocusedRouteNameFromRoute(route);
+            setHide(subRoute === POSTS_SCREEN);
+          },
+        })}
         options={{
           tabBarIcon: () => {
             return <HomeIcon />;

@@ -10,16 +10,14 @@ export const setComments = (payload: {}) => {
   return {type: SET_COMMENTS, payload};
 };
 
-export const fetchImages = () => {
+export const fetchComments = () => {
   return async (dispatch: any) => {
     try {
       await dispatch(getComments());
       const response: any = await CommentsService.comments();
-      console.log(response.slice(0, 10));
       await dispatch(setComments(response || {}));
       return true;
     } catch (error) {
-      console.log(error);
       await dispatch(setComments({}));
       return false;
     }

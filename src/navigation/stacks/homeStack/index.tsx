@@ -8,11 +8,22 @@ import {HOME_SCREEN, POSTS_SCREEN} from '../../routePaths';
 export default function HomeStack() {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator
-      initialRouteName={HOME_SCREEN}
-      screenOptions={{headerShown: false}}>
-      <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
-      <Stack.Screen name={POSTS_SCREEN} component={PostsScreen} />
+    <Stack.Navigator initialRouteName={HOME_SCREEN}>
+      <Stack.Screen
+        name={HOME_SCREEN}
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={POSTS_SCREEN}
+        component={PostsScreen}
+        options={{
+          title: 'Posts',
+          headerTitleAlign: 'center',
+        }}
+      />
     </Stack.Navigator>
   );
 }
