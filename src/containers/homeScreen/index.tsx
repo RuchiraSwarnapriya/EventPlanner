@@ -32,6 +32,7 @@ const HomeScreen = (props: {navigation: any}) => {
   const dispatch: any = useDispatch();
   const imagesLoading = useSelector(({images}) => images.isFetching);
   const usersLoading = useSelector(({users}) => users.isFetching);
+  const postsLoading = useSelector(({posts}) => posts.isFetching);
 
   const imagesData = useSelector(({images}) => images.imagesData);
   const usersData = useSelector(({users}) => users.usersData);
@@ -63,7 +64,7 @@ const HomeScreen = (props: {navigation: any}) => {
     navigation.navigate(POSTS_SCREEN);
   };
 
-  return imagesLoading || usersLoading ? (
+  return imagesLoading || usersLoading || postsLoading ? (
     <View style={styles.loadingContainer}>
       <ActivityIndicator size={20} color={Colors.lightGrey} />
     </View>
@@ -75,12 +76,11 @@ const HomeScreen = (props: {navigation: any}) => {
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
           scrollEventThrottle={16}>
-          {imagesData &&
-            imagesData.map((image: Images, index: any) => (
-              <View key={index} style={styles.imageContainer}>
-                <Image source={{uri: image.url}} style={styles.image} />
-              </View>
-            ))}
+          {imagesData.map((image: Images, index: any) => (
+            <View key={index} style={styles.imageContainer}>
+              <Image source={{uri: image.url}} style={styles.image} />
+            </View>
+          ))}
         </ScrollView>
         <View style={styles.paginationContainer}>
           <Text style={styles.paginationText}>
