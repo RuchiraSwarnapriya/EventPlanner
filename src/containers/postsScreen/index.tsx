@@ -4,7 +4,7 @@ import {
   Text,
   ActivityIndicator,
   TouchableOpacity,
-  ScrollView,
+  FlatList,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -51,43 +51,46 @@ const PostsScreen = () => {
     fetchData();
   }, [dispatch]);
 
+  const renderItem = ({item}: {item: Posts}) => (
+    <View key={item.id} style={styles.postContainer}>
+      <Text style={styles.postTitle}>{item.title}</Text>
+      <Text>{item.body}</Text>
+      <TouchableOpacity
+        onPress={() => toggleExpand(item.id)}
+        style={styles.arrowButton}>
+        <View style={styles.commentButtonContainer}>
+          <Text style={styles.commentsButtonText}>
+            {getCommentsForPost(item.id).length} comments{' '}
+          </Text>
+          <View style={styles.expandIconContainer}>
+            {expandedPost === item.id ? <UpArrow /> : <DownArrow />}
+          </View>
+        </View>
+      </TouchableOpacity>
+      {expandedPost === item.id && (
+        <View style={styles.commentsContainer}>
+          {getCommentsForPost(item.id).map((comment: Comments) => (
+            <View key={comment.id} style={styles.commentContainer}>
+              <Text style={styles.commentAuthor}>{comment.name}</Text>
+              <Text style={styles.commentBody}>{comment.body}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+
   return commentsLoading ? (
     <View style={styles.loadingContainer}>
       <ActivityIndicator size={20} color={Colors.lightGrey} />
     </View>
   ) : (
-    <View style={styles.mainContainer}>
-      <ScrollView>
-        {postsData.map((post: Posts) => (
-          <View key={post.id} style={styles.postContainer}>
-            <Text style={styles.postTitle}>{post.title}</Text>
-            <Text>{post.body}</Text>
-            <TouchableOpacity
-              onPress={() => toggleExpand(post.id)}
-              style={styles.arrowButton}>
-              <View style={styles.commentButtonContainer}>
-                <Text style={styles.commentsButtonText}>
-                  {getCommentsForPost(post.id).length} comments{' '}
-                </Text>
-                <View style={styles.expandIconContainer}>
-                  {expandedPost === post.id ? <UpArrow /> : <DownArrow />}
-                </View>
-              </View>
-            </TouchableOpacity>
-            {expandedPost === post.id && (
-              <View style={styles.commentsContainer}>
-                {getCommentsForPost(post.id).map((comment: Comments) => (
-                  <View key={comment.id} style={styles.commentContainer}>
-                    <Text style={styles.commentAuthor}>{comment.name}</Text>
-                    <Text style={styles.commentBody}>{comment.body}</Text>
-                  </View>
-                ))}
-              </View>
-            )}
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+    <FlatList
+      data={postsData}
+      renderItem={renderItem}
+      keyExtractor={item => item.id.toString()}
+      contentContainerStyle={styles.postContainer}
+    />
   );
 };
 export default PostsScreen;
