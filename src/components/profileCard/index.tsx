@@ -1,8 +1,6 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 
-import {getRandomColor} from '../../utils/commons';
-
 import styles from './styles';
 
 type Props = {
@@ -14,21 +12,14 @@ type Props = {
 const ProfileCard: React.FC<Props> = props => {
   const {name, email, imageUri} = props;
 
-  const initials = name.slice(0, 2).toUpperCase();
-
-  const randomColor = getRandomColor();
+  const initials = name && name.slice(0, 2).toUpperCase();
 
   return (
     <View style={styles.mainContainer}>
       {imageUri ? (
         <Image source={{uri: imageUri}} style={styles.image} />
       ) : (
-        <View
-          style={[
-            styles.image,
-            {backgroundColor: randomColor},
-            styles.initialsContainer,
-          ]}>
+        <View style={[styles.image, styles.initialsContainer]}>
           <Text style={styles.initials}>{initials}</Text>
         </View>
       )}

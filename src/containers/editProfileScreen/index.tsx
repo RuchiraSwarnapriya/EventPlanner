@@ -41,8 +41,6 @@ const EditProfileScreen = (props: {navigation: any}) => {
   const [address, setAddress] = useState(userData.address);
   const [imagePath, setImagePath] = useState(profileImageURL);
 
-  console.log(profileImageURL);
-
   const onSave = async () => {
     try {
       await dispatch(uploadImage(imagePath));

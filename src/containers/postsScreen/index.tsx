@@ -1,14 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-
-import {fetchComments} from '../../redux/actions/commets';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import {Posts} from '../../services/constants/types/posts';
 import {Comments} from '../../services/constants/types/comments';
@@ -16,14 +8,9 @@ import {Comments} from '../../services/constants/types/comments';
 import DownArrow from '../../assets/icons/downArrow.svg';
 import UpArrow from '../../assets/icons/upArrow.svg';
 
-import {Colors} from '../../assets/colors';
-
 import styles from './styles';
 
 const PostsScreen = () => {
-  const dispatch: any = useDispatch();
-  const commentsLoading = useSelector(({comments}) => comments.isFetching);
-
   const postsData = useSelector(({posts}) => posts.postsData);
   const commentsData = useSelector(({comments}) => comments.commentsData);
 
@@ -38,18 +25,6 @@ const PostsScreen = () => {
   const toggleExpand = (postId: any) => {
     setExpandedPost(prevState => (prevState === postId ? null : postId));
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(fetchComments());
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      }
-    };
-
-    fetchData();
-  }, [dispatch]);
 
   const renderItem = ({item}: {item: Posts}) => (
     <View key={item.id} style={styles.postContainer}>
@@ -80,11 +55,7 @@ const PostsScreen = () => {
     </View>
   );
 
-  return commentsLoading ? (
-    <View style={styles.loadingContainer}>
-      <ActivityIndicator size={20} color={Colors.lightGrey} />
-    </View>
-  ) : (
+  return (
     <FlatList
       data={postsData}
       renderItem={renderItem}

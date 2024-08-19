@@ -17,6 +17,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 20,
     borderColor: Colors.pink,
+    backgroundColor: Colors.pink,
   },
   name: {
     fontSize: 16,

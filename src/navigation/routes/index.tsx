@@ -25,7 +25,6 @@ export default function MainRoute() {
   const [user, setUser] = useState();
 
   const onAuthStateChanged = (userData: any) => {
-    console.log(user);
     setUser(userData);
     if (initializing) {
       setInitializing(false);

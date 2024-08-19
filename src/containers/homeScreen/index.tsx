@@ -27,6 +27,7 @@ import CommentIcon from '../../assets/icons/comments.svg';
 import RedArrowIcon from '../../assets/icons/redArrow.svg';
 
 import styles from './styles';
+import {fetchComments} from '../../redux/actions/commets';
 
 const HomeScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -34,6 +35,8 @@ const HomeScreen = (props: {navigation: any}) => {
   const imagesLoading = useSelector(({images}) => images.isFetching);
   const usersLoading = useSelector(({users}) => users.isFetching);
   const postsLoading = useSelector(({posts}) => posts.isFetching);
+  const commentsLoading = useSelector(({comments}) => comments.isFetching);
+  const userDataLoading = useSelector(({user}) => user.isFetching);
 
   const imagesData = useSelector(({images}) => images.imagesData);
   const usersData = useSelector(({users}) => users.usersData);
@@ -43,10 +46,11 @@ const HomeScreen = (props: {navigation: any}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await dispatch(fetchUserData(authData.uid));
         await dispatch(fetchImages());
         await dispatch(fetchUsers());
         await dispatch(fetchPosts());
-        await dispatch(fetchUserData(authData.uid));
+        await dispatch(fetchComments());
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -67,7 +71,11 @@ const HomeScreen = (props: {navigation: any}) => {
     navigation.navigate(POSTS_SCREEN);
   };
 
-  return imagesLoading || usersLoading || postsLoading ? (
+  return imagesLoading ||
+    usersLoading ||
+    postsLoading ||
+    commentsLoading ||
+    userDataLoading ? (
     <View style={styles.loadingContainer}>
       <ActivityIndicator size={20} color={Colors.lightGrey} />
     </View>
