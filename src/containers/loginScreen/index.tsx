@@ -37,7 +37,7 @@ const LoginScreen = (props: {navigation: any}) => {
   const [passwordError, setPasswordError] = useState('');
 
   const dispatch: any = useDispatch();
-  const loading = useSelector(({auth}) => auth.isFetching);
+  const isLoading = useSelector(({authorizer}) => authorizer.isLoginLoading);
 
   const validateForm = () => {
     let valid = true;
@@ -129,7 +129,7 @@ const LoginScreen = (props: {navigation: any}) => {
               <Button
                 buttonText="Login"
                 onPress={onLogin}
-                isLoading={loading}
+                isLoading={isLoading}
                 icon={<RightArrow />}
               />
               <Button

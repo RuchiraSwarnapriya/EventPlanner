@@ -9,12 +9,15 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import CustomTextInput from '../../components/customTextInput';
 import Button from '../../components/buttons/solidButton';
 
-import {flowCompleted} from '../../redux/actions/auth';
+import {setAppState} from '../../redux/actions/auth';
+import {uploadUserData} from '../../redux/actions/user';
+
+import {HOME} from '../../utils/constants';
 
 import RightArrow from '../../assets/icons/rightArrow.svg';
 import LeftArrow from '../../assets/icons/leftArrow.svg';
@@ -24,10 +27,13 @@ import styles from './styles';
 const PersonalInfoScreen = (props: {navigation: any}) => {
   const {navigation} = props;
   const dispatch: any = useDispatch();
+  const authData = useSelector(({authorizer}) => authorizer.authData);
+  const isLoading = useSelector(({user}) => user.isUserDataUploading);
+  const profileImageURL = useSelector(({user}) => user.userImageData);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(authData.email);
   const [phoneNum, setPhoneNum] = useState('');
   const [address, setAddress] = useState('');
 
@@ -35,8 +41,22 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
     navigation.goBack();
   };
 
-  const onNext = () => {
-    dispatch(flowCompleted());
+  const onNext = async () => {
+    try {
+      const data = {
+        firstName,
+        lastName,
+        email,
+        phoneNum,
+        address,
+        profileImageURL,
+      };
+      await dispatch(uploadUserData(authData.uid, data)).then(() =>
+        dispatch(setAppState(HOME)),
+      );
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
   };
 
   return (
@@ -94,6 +114,7 @@ const PersonalInfoScreen = (props: {navigation: any}) => {
               <Button
                 buttonText="Next"
                 onPress={onNext}
+                isLoading={isLoading}
                 buttonWidth={166}
                 icon={<RightArrow />}
               />

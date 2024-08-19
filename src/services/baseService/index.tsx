@@ -1,9 +1,6 @@
-import Config from 'react-native-config';
 import axios from 'axios';
 
 import {Endpoint} from '../constants/types';
-
-const ROOT_ENDPOINT = Config.APP_API_BASE;
 
 export class BaseService {
   private authAction: any;

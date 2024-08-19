@@ -18,17 +18,52 @@ import CustomTextInput from '../../components/customTextInput';
 import WhiteCamIcon from '../../assets/icons/whiteCam.svg';
 
 import styles from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  fetchUserData,
+  updateUserData,
+  uploadImage,
+} from '../../redux/actions/user';
 
-const EditProfileScreen = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNum, setPhoneNum] = useState('');
-  const [address, setAddress] = useState('');
-  const [imagePath, setImagePath] = useState('');
+const EditProfileScreen = (props: {navigation: any}) => {
+  const {navigation} = props;
+  const dispatch: any = useDispatch();
+  const authData = useSelector(({authorizer}) => authorizer.authData);
+  const userData = useSelector(({user}) => user.userData);
+  const profileImageURL = useSelector(({user}) => user.userImageData);
+  const isUserDataUpdating = useSelector(({user}) => user.isUserDataUploading);
+  const isUserImageUpdating = useSelector(({user}) => user.isImageUploding);
 
-  const onSave = () => {
-    console.log('saved');
+  const [firstName, setFirstName] = useState(userData.firstName);
+  const [lastName, setLastName] = useState(userData.lastName);
+  const [email, setEmail] = useState(userData.email);
+  const [phoneNum, setPhoneNum] = useState(userData.phoneNum);
+  const [address, setAddress] = useState(userData.address);
+  const [imagePath, setImagePath] = useState(profileImageURL);
+
+  console.log(profileImageURL);
+
+  const onSave = async () => {
+    try {
+      await dispatch(uploadImage(imagePath));
+
+      const data = {
+        firstName,
+        lastName,
+        email,
+        phoneNum,
+        address,
+        profileImageURL,
+      };
+      await dispatch(updateUserData(authData.uid, data)).then(
+        async () =>
+          await dispatch(fetchUserData(authData.uid)).then(() =>
+            navigation.goBack(),
+          ),
+      );
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
   };
 
   const onOpenCamera = () => {
@@ -38,7 +73,6 @@ const EditProfileScreen = () => {
       cropping: true,
     }).then(image => {
       setImagePath(image.path);
-      console.log(image);
     });
   };
 
@@ -90,7 +124,11 @@ const EditProfileScreen = () => {
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Button buttonText="Save" onPress={onSave} />
+              <Button
+                buttonText="Save"
+                onPress={onSave}
+                isLoading={isUserDataUpdating || isUserImageUpdating}
+              />
             </View>
           </View>
         </ScrollView>

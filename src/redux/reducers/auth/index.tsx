@@ -1,6 +1,6 @@
 import {AUTH, HOME, INFO} from '../../../utils/constants';
 import {
-  FLOW_COMPLETED,
+  SET_APP_STATE,
   GET_LOGIN_DATA,
   GET_SIGNUP_DATA,
   LOGIN_FAILED,
@@ -14,7 +14,7 @@ export const initialState = {
   isLoginLoading: false,
   isSignUpLoading: false,
   tempAppState: '',
-  loginData: {},
+  authData: {},
   signUpData: {},
 };
 
@@ -26,7 +26,7 @@ const authReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isLoginLoading: false,
-        loginData: action.payload,
+        authData: action.payload,
         tempAppState: HOME,
       };
     case LOGIN_FAILED:
@@ -36,8 +36,7 @@ const authReducer = (state = initialState, action: any) => {
         ...state,
         isLoginLoading: false,
         isSignUpLoading: false,
-        signUpData: '',
-        loginData: '',
+        authData: '',
         tempAppState: AUTH,
       };
     case LOGIN_FAILED:
@@ -48,20 +47,19 @@ const authReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isSignUpLoading: false,
-        signUpData: action.payload,
+        authData: action.payload,
         tempAppState: INFO,
       };
     case SIGNUP_FAILED:
       return {
         ...state,
         isSignUpLoading: false,
-        signUpData: action.payload,
         tempAppState: '',
       };
-    case FLOW_COMPLETED:
+    case SET_APP_STATE:
       return {
         ...state,
-        tempAppState: HOME,
+        tempAppState: action.payload,
       };
     default:
       return state;

@@ -13,14 +13,20 @@ import RightArrow from '../../assets/icons/rightArrow.svg';
 import RedCamIcon from '../../assets/icons/redCam.svg';
 
 import styles from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {uploadImage} from '../../redux/actions/user';
 
 const WelcomScreen = (props: {navigation: any}) => {
   const {navigation} = props;
+  const dispatch: any = useDispatch();
+  const isImageUploding = useSelector(({user}) => user.isImageUploding);
 
   const [imagePath, setImagePath] = useState('');
 
-  const onNext = () => {
-    navigation.navigate(PERSONAL_INFO_SCREEN);
+  const onNext = async () => {
+    await dispatch(uploadImage(imagePath)).then(() =>
+      navigation.navigate(PERSONAL_INFO_SCREEN),
+    );
   };
 
   const onOpenCamera = () => {
@@ -30,7 +36,6 @@ const WelcomScreen = (props: {navigation: any}) => {
       cropping: true,
     }).then(image => {
       setImagePath(image.path);
-      console.log(image);
     });
   };
 
@@ -44,7 +49,12 @@ const WelcomScreen = (props: {navigation: any}) => {
         <CircleImageViewer imageSource={imagePath} icon={<RedCamIcon />} />
       </TouchableOpacity>
       <View style={styles.buttonContiner}>
-        <Button buttonText="Next" onPress={onNext} icon={<RightArrow />} />
+        <Button
+          buttonText="Next"
+          onPress={onNext}
+          icon={<RightArrow />}
+          isLoading={isImageUploding}
+        />
       </View>
     </View>
   );

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
@@ -31,6 +31,7 @@ const SignUpScreen = (props: {navigation: any}) => {
   const {navigation} = props;
 
   const dispatch: any = useDispatch();
+  const isLoading = useSelector(({authorizer}) => authorizer.isSignUpLoading);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -83,7 +84,7 @@ const SignUpScreen = (props: {navigation: any}) => {
     //   setPassword('');
     //   setConfirmPassword('');
     // }
-    dispatch(signUp(email, password, confirmPassword));
+    dispatch(signUp(email, password));
   };
 
   return (
@@ -142,6 +143,7 @@ const SignUpScreen = (props: {navigation: any}) => {
               <Button
                 buttonText="Sign Up"
                 onPress={onSignUp}
+                isLoading={isLoading}
                 icon={<RightArrow />}
               />
               <Button

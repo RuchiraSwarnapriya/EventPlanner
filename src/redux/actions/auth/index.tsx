@@ -1,5 +1,5 @@
 import {
-  FLOW_COMPLETED,
+  SET_APP_STATE,
   GET_LOGIN_DATA,
   GET_SIGNUP_DATA,
   LOGIN_FAILED,
@@ -8,6 +8,8 @@ import {
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
 } from '../../actionTypes/auth';
+
+import auth from '@react-native-firebase/auth';
 
 export const getLoginData = () => {
   return {type: GET_LOGIN_DATA};
@@ -21,7 +23,7 @@ export const loginFalied = () => {
   return {type: LOGIN_FAILED};
 };
 
-export const logout = () => {
+export const logoutSucess = () => {
   return {type: LOGOUT_SUCCESS};
 };
 
@@ -33,43 +35,57 @@ export const signUpSuccess = (payload: {}) => {
   return {type: SIGNUP_SUCCESS, payload};
 };
 
-export const signUpFalied = () => {
+export const signUpFailed = () => {
   return {type: SIGNUP_FAILED};
 };
 
-export const flowCompleted = () => {
-  return {type: FLOW_COMPLETED};
+export const setAppState = (payload: string) => {
+  return {type: SET_APP_STATE, payload};
 };
 
 export const login = (email: string, password: string) => {
   return async (dispatch: any) => {
     try {
       await dispatch(getLoginData());
-      console.log(email, password);
-      await dispatch(loginSuccess(email));
+      const userCredential = await auth().signInWithEmailAndPassword(
+        email,
+        password,
+      );
+      await dispatch(loginSuccess(userCredential.user));
       return true;
     } catch (error) {
-      console.log(error);
       await dispatch(loginFalied());
       return false;
     }
   };
 };
 
-export const signUp = (
-  email: string,
-  password: string,
-  confrimPassword: string,
-) => {
+export const logOut = () => {
+  return async (dispatch: any) => {
+    try {
+      await auth().signOut();
+      dispatch(logoutSucess());
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+};
+
+export const signUp = (email: string, password: string) => {
   return async (dispatch: any) => {
     try {
       await dispatch(getSignUpData());
-      console.log(email, password, confrimPassword);
-      await dispatch(signUpSuccess(email));
+      const userCredential = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      dispatch(signUpSuccess(userCredential.user));
       return true;
     } catch (error) {
-      console.log(error);
-      await dispatch(signUpFalied());
+      console.error(error);
+      dispatch(signUpFailed());
       return false;
     }
   };

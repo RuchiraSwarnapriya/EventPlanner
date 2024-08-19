@@ -18,6 +18,7 @@ import {POSTS_SCREEN} from '../../navigation/routePaths';
 import {fetchImages} from '../../redux/actions/images';
 import {fetchPosts} from '../../redux/actions/posts';
 import {fetchUsers} from '../../redux/actions/users';
+import {fetchUserData} from '../../redux/actions/user';
 
 import {Images, Users} from '../../services/constants/types/home';
 
@@ -37,6 +38,7 @@ const HomeScreen = (props: {navigation: any}) => {
   const imagesData = useSelector(({images}) => images.imagesData);
   const usersData = useSelector(({users}) => users.usersData);
   const postsData = useSelector(({posts}) => posts.postsData);
+  const authData = useSelector(({authorizer}) => authorizer.authData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,13 +46,14 @@ const HomeScreen = (props: {navigation: any}) => {
         await dispatch(fetchImages());
         await dispatch(fetchUsers());
         await dispatch(fetchPosts());
+        await dispatch(fetchUserData(authData.uid));
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
     };
 
     fetchData();
-  }, [dispatch]);
+  }, [authData.uid, dispatch]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 

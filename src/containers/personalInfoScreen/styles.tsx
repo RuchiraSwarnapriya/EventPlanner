@@ -28,7 +28,6 @@ export default StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
     bottom: 50,
-    width: Dimensions.get('window').width,
     alignSelf: 'center',
     flexDirection: 'row',
     paddingHorizontal: 25,
