@@ -29,7 +29,7 @@ import MailIcon from '../../assets/icons/email.svg';
 import PasswordIcon from '../../assets/icons/lock.svg';
 import EyeIcon from '../../assets/icons/eye.svg';
 
-import styles from './styles';
+import styles from './Styles';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;

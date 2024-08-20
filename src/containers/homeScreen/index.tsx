@@ -19,6 +19,7 @@ import {fetchImages} from '../../redux/actions/images';
 import {fetchPosts} from '../../redux/actions/posts';
 import {fetchUsers} from '../../redux/actions/users';
 import {fetchUserData} from '../../redux/actions/user';
+import {fetchComments} from '../../redux/actions/commets';
 
 import {Images, Users} from '../../services/constants/types/home';
 
@@ -26,8 +27,7 @@ import {Colors} from '../../assets/colors';
 import CommentIcon from '../../assets/icons/comments.svg';
 import RedArrowIcon from '../../assets/icons/redArrow.svg';
 
-import styles from './styles';
-import {fetchComments} from '../../redux/actions/commets';
+import styles from './Styles';
 
 const HomeScreen = (props: {navigation: any}) => {
   const {navigation} = props;
