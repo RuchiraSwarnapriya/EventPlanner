@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -30,6 +30,7 @@ import PasswordIcon from '../../assets/icons/lock.svg';
 import EyeIcon from '../../assets/icons/eye.svg';
 
 import styles from './Styles';
+import {useFocusEffect} from '@react-navigation/native';
 
 const LoginScreen = (props: {navigation: any}) => {
   const {navigation} = props;
@@ -73,8 +74,6 @@ const LoginScreen = (props: {navigation: any}) => {
   const onLogin = async () => {
     if (validateForm()) {
       await dispatch(login(email, password));
-      setEmail('');
-      setPassword('');
     }
   };
 
@@ -85,6 +84,13 @@ const LoginScreen = (props: {navigation: any}) => {
   useEffect(() => {
     setIsDisabled(email.trim().length === 0);
   }, [email]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setEmail('');
+      setPassword('');
+    }, []),
+  );
 
   return (
     <KeyboardAvoidingView
