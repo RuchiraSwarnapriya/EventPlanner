@@ -1,5 +1,6 @@
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import {Alert} from 'react-native';
 
 export const saveUserData = async (userId: string, data: any) => {
   await firestore().collection('users').doc(userId).set(data);
@@ -15,7 +16,7 @@ export const getUser = async (userId: string) => {
     if (userDoc.exists) {
       return userDoc.data();
     } else {
-      console.log('No such document!');
+      Alert.alert('User Error', 'No such user');
       return null;
     }
   } catch (error) {
