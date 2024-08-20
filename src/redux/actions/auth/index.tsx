@@ -81,6 +81,16 @@ export const logOut = () => {
   };
 };
 
+export const resetUserPassword = async (email: string) => {
+  try {
+    await auth().sendPasswordResetEmail(email);
+    Alert.alert('Password reset email sent!');
+  } catch (error) {
+    console.error(error);
+    Alert.alert('Error sending password reset email.');
+  }
+};
+
 export const signUp = (email: string, password: string) => {
   return async (dispatch: any) => {
     try {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -18,11 +18,12 @@ import Titles from '../../components/titles';
 
 import {SIGNUP_SCREEN} from '../../navigation/routePaths';
 
-import {login} from '../../redux/actions/auth';
+import {login, resetUserPassword} from '../../redux/actions/auth';
 
 import {validateEmail} from '../../utils/validators';
 
 import AngledArrow from '../../assets/icons/angledArrow.svg';
+import GreyAngledArrow from '../../assets/icons/greyAngledArrow.svg';
 import RightArrow from '../../assets/icons/rightArrow.svg';
 import MailIcon from '../../assets/icons/email.svg';
 import PasswordIcon from '../../assets/icons/lock.svg';
@@ -37,6 +38,7 @@ const LoginScreen = (props: {navigation: any}) => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const dispatch: any = useDispatch();
   const isLoading = useSelector(({authorizer}) => authorizer.isLoginLoading);
@@ -64,8 +66,8 @@ const LoginScreen = (props: {navigation: any}) => {
     return valid;
   };
 
-  const resetPassword = () => {
-    console.log('password resetted');
+  const resetPassword = async () => {
+    await dispatch(resetUserPassword(email));
   };
 
   const onLogin = async () => {
@@ -79,6 +81,10 @@ const LoginScreen = (props: {navigation: any}) => {
   const signUp = () => {
     navigation.navigate(SIGNUP_SCREEN);
   };
+
+  useEffect(() => {
+    setIsDisabled(email.trim().length === 0);
+  }, [email]);
 
   return (
     <KeyboardAvoidingView
@@ -121,11 +127,11 @@ const LoginScreen = (props: {navigation: any}) => {
                   <TextButton
                     buttonText="Restore password"
                     onPress={resetPassword}
-                    icon={<AngledArrow />}
+                    icon={isDisabled ? <GreyAngledArrow /> : <AngledArrow />}
+                    disabled={isDisabled}
                   />
                 </View>
               </View>
-
               <View style={styles.buttonContainer}>
                 <Button
                   buttonText="Login"
