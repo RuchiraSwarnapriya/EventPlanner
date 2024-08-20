@@ -50,8 +50,10 @@ const EditProfileScreen = (props: {navigation: any}) => {
         email,
         phoneNum,
         address,
-        profileImageURL,
+        profileImageURL:
+          profileImageURL.length === 0 ? imagePath : profileImageURL,
       };
+      console.log(data);
       await dispatch(updateUserData(authData.uid, data)).then(
         async () =>
           await dispatch(fetchUserData(authData.uid)).then(() =>
