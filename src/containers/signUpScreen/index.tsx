@@ -91,71 +91,71 @@ const SignUpScreen = (props: {navigation: any}) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView>
-          <View style={styles.mainContainer}>
-            <Titles title="Welcome" subTitle="Welcome to your portal" />
-            <View style={styles.inputContainer}>
-              <CustomTextInput
-                label={'Email'}
-                placeholder={'Please enter your email'}
-                onChangeText={(text: string) => {
-                  setEmail(text);
-                  if (emailError) {
-                    setEmailError('');
-                  }
-                }}
-                iconOne={<MailIcon />}
-                value={email}
-                errorText={emailError}
-              />
-              <CustomTextInput
-                label={'Password'}
-                placeholder={'Please enter your password'}
-                onChangeText={(text: string) => {
-                  setPassword(text);
-                  if (passwordError) {
-                    setPasswordError('');
-                  }
-                }}
-                secureTextEntry={true}
-                iconOne={<PasswordIcon />}
-                iconTwo={<EyeIcon />}
-                value={password}
-                errorText={passwordError}
-              />
-              <CustomTextInput
-                label={'Confirm Password'}
-                placeholder={'Please enter your password again'}
-                onChangeText={(text: string) => {
-                  setConfirmPassword(text);
-                  if (confirmPasswordError) {
-                    setConfirmPasswordError('');
-                  }
-                }}
-                secureTextEntry={true}
-                iconOne={<PasswordIcon />}
-                iconTwo={<EyeIcon />}
-                value={confirmPassword}
-                errorText={confirmPasswordError}
-              />
+        <View>
+          <ScrollView>
+            <View style={styles.mainContainer}>
+              <Titles title="Welcome" subTitle="Welcome to your portal" />
+              <View style={styles.inputContainer}>
+                <CustomTextInput
+                  label={'Email'}
+                  placeholder={'Please enter your email'}
+                  onChangeText={(text: string) => {
+                    setEmail(text);
+                    if (emailError) {
+                      setEmailError('');
+                    }
+                  }}
+                  iconOne={<MailIcon />}
+                  value={email}
+                  errorText={emailError}
+                />
+                <CustomTextInput
+                  label={'Password'}
+                  placeholder={'Please enter your password'}
+                  onChangeText={(text: string) => {
+                    setPassword(text);
+                    if (passwordError) {
+                      setPasswordError('');
+                    }
+                  }}
+                  secureTextEntry={true}
+                  iconOne={<PasswordIcon />}
+                  iconTwo={<EyeIcon />}
+                  value={password}
+                  errorText={passwordError}
+                />
+                <CustomTextInput
+                  label={'Confirm Password'}
+                  placeholder={'Please enter your password again'}
+                  onChangeText={(text: string) => {
+                    setConfirmPassword(text);
+                    if (confirmPasswordError) {
+                      setConfirmPasswordError('');
+                    }
+                  }}
+                  secureTextEntry={true}
+                  iconOne={<PasswordIcon />}
+                  iconTwo={<EyeIcon />}
+                  value={confirmPassword}
+                  errorText={confirmPasswordError}
+                />
+              </View>
+              <View style={styles.buttonContainer}>
+                <Button
+                  buttonText="Sign Up"
+                  onPress={onSignUp}
+                  icon={<RightArrow />}
+                />
+                <Button
+                  buttonText="Login"
+                  onPress={login}
+                  icon={<RightArrow />}
+                />
+              </View>
             </View>
-            <View style={styles.buttonContainer}>
-              <Button
-                buttonText="Sign Up"
-                onPress={onSignUp}
-                isLoading={isLoading}
-                icon={<RightArrow />}
-              />
-              <Button
-                buttonText="Login"
-                onPress={login}
-                icon={<RightArrow />}
-              />
-            </View>
-          </View>
-          {isLoading && <Loader />}
-        </ScrollView>
-        src/containers/loginScreen/index.tsx
+            {isLoading && <Loader />}
+          </ScrollView>
+        </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

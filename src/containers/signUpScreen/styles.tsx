@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {Colors} from '../../assets/colors';
 
 export default StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: Colors.white,
+    height: Dimensions.get('window').height,
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingTop: 100,

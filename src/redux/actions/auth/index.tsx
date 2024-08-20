@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import {
   SET_APP_STATE,
   GET_LOGIN_DATA,
@@ -53,7 +54,14 @@ export const login = (email: string, password: string) => {
       );
       await dispatch(loginSuccess(userCredential.user));
       return true;
-    } catch (error) {
+    } catch (error: any) {
+      let errorMessage = 'An error occurred while logging in.';
+
+      if (error.code === 'auth/invalid-credential') {
+        errorMessage = 'Username or password is incorrect.';
+      }
+
+      Alert.alert('Login Error', errorMessage);
       await dispatch(loginFalied());
       return false;
     }
@@ -83,8 +91,24 @@ export const signUp = (email: string, password: string) => {
       );
       dispatch(signUpSuccess(userCredential.user));
       return true;
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      let errorMessage = 'An unexpected error occurred. Please try again.';
+
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'The email address is not valid.';
+          break;
+        case 'auth/email-already-in-use':
+          errorMessage = 'The email address is already in use.';
+          break;
+        case 'auth/weak-password':
+          errorMessage =
+            'The password is too weak. Please use a stronger password.';
+          break;
+        default:
+          errorMessage;
+      }
+      Alert.alert('Login Error', errorMessage);
       dispatch(signUpFailed());
       return false;
     }

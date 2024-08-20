@@ -11,8 +11,9 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
-import Loader from '../../components/loader';
+
 import TextButton from '../../components/buttons/textButton';
+import Loader from '../../components/loader';
 import Titles from '../../components/titles';
 
 import {SIGNUP_SCREEN} from '../../navigation/routePaths';
