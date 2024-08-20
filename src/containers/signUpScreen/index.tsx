@@ -108,6 +108,7 @@ const SignUpScreen = (props: {navigation: any}) => {
                   iconOne={<MailIcon />}
                   value={email}
                   errorText={emailError}
+                  keyboardType="email-address"
                 />
                 <CustomTextInput
                   label={'Password'}

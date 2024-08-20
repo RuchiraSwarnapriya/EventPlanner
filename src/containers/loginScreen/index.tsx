@@ -107,6 +107,7 @@ const LoginScreen = (props: {navigation: any}) => {
                   value={email}
                   iconOne={<MailIcon />}
                   errorText={emailError}
+                  keyboardType="email-address"
                 />
                 <CustomTextInput
                   label={'Password'}

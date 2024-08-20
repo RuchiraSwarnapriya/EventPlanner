@@ -108,6 +108,7 @@ const EditProfileScreen = (props: {navigation: any}) => {
                 placeholder={'Please enter your email'}
                 onChangeText={setEmail}
                 value={email}
+                keyboardType="email-address"
               />
               <CustomTextInput
                 label={'Phone number'}
