@@ -15,6 +15,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     color: Colors.lightGrey,
+    width: 200,
   },
   image: {
     height: 44,
