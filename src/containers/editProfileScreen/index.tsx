@@ -50,8 +50,10 @@ const EditProfileScreen = (props: {navigation: any}) => {
         email,
         phoneNum,
         address,
-        profileImageURL,
+        profileImageURL:
+          profileImageURL.length === 0 ? imagePath : profileImageURL,
       };
+      console.log(data);
       await dispatch(updateUserData(authData.uid, data)).then(
         async () =>
           await dispatch(fetchUserData(authData.uid)).then(() =>
@@ -106,6 +108,7 @@ const EditProfileScreen = (props: {navigation: any}) => {
                 placeholder={'Please enter your email'}
                 onChangeText={setEmail}
                 value={email}
+                keyboardType="email-address"
               />
               <CustomTextInput
                 label={'Phone number'}
