@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, Text, View} from 'react-native';
+import {ActivityIndicator, Image, Text, View} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 import ProfileCard from '../../components/profileCard';
@@ -15,7 +15,6 @@ import {Colors} from '../../assets/colors';
 const HomeDrawer = () => {
   const dispatch: any = useDispatch();
   const userData = useSelector(({user}) => user.userData);
-  const profileImageURL = useSelector(({user}) => user.userImageData);
   const userDataLoading = useSelector(({user}) => user.isFetching);
 
   const version = DeviceInfo.getVersion();
@@ -30,11 +29,15 @@ const HomeDrawer = () => {
     </View>
   ) : (
     <View style={styles.mainContainer}>
-      <ProfileCard
-        name={userData.firstName + userData.lastName}
-        email={userData.email}
-        imageUri={profileImageURL}
-      />
+      <View style={styles.profileContainer}>
+        <Image source={{uri: userData.profileImageURL}} style={styles.image} />
+        <ProfileCard
+          name={userData.firstName + userData.lastName}
+          email={userData.email}
+          noImage={true}
+        />
+      </View>
+
       <View style={styles.buttonContainer}>
         <TextButton
           buttonText="Logout"

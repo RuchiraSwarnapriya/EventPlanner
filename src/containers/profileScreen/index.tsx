@@ -10,16 +10,17 @@ import {useSelector} from 'react-redux';
 const ProfileScreen = (props: {navigation: any}) => {
   const {navigation} = props;
   const userData = useSelector(({user}) => user.userData);
-  const profileImageURL = useSelector(({user}) => user.userImageData);
 
   const onEdit = () => {
     navigation.navigate(EDIT_PROFILE_SCREEN);
   };
+
+  console.log(userData.profileImageURL);
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
         <View style={styles.imageContainer}>
-          <CircleImageViewer imageSource={profileImageURL} />
+          <CircleImageViewer imageSource={userData.profileImageURL} />
         </View>
         <CustomTextBox label="First name" value={userData.firstName} />
         <CustomTextBox label="Last name" value={userData.lastName} />

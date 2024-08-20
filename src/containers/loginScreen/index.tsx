@@ -67,13 +67,11 @@ const LoginScreen = (props: {navigation: any}) => {
   };
 
   const onLogin = async () => {
-    // if (validateForm()) {
-    //   dispatch(login(email, password));
-    //   setEmail('');
-    //   setPassword('');
-    //   navigation.navigate(WELCOME_SCREEN);
-    // }
-    await dispatch(login(email, password));
+    if (validateForm()) {
+      await dispatch(login(email, password));
+      setEmail('');
+      setPassword('');
+    }
   };
 
   const signUp = () => {

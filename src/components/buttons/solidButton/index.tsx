@@ -25,7 +25,7 @@ const Button: React.FC<Props> = props => {
         styles.mainContainer,
         {
           backgroundColor: disabled
-            ? Colors.grey
+            ? Colors.pink
             : reverse
             ? Colors.pink
             : Colors.red,

@@ -39,12 +39,10 @@ const EditProfileScreen = (props: {navigation: any}) => {
   const [email, setEmail] = useState(userData.email);
   const [phoneNum, setPhoneNum] = useState(userData.phoneNum);
   const [address, setAddress] = useState(userData.address);
-  const [imagePath, setImagePath] = useState(profileImageURL);
+  const [imagePath, setImagePath] = useState(userData.profileImageURL);
 
   const onSave = async () => {
     try {
-      await dispatch(uploadImage(imagePath));
-
       const data = {
         firstName,
         lastName,
@@ -69,7 +67,8 @@ const EditProfileScreen = (props: {navigation: any}) => {
       width: 300,
       height: 400,
       cropping: true,
-    }).then(image => {
+    }).then(async image => {
+      await dispatch(uploadImage(image.path));
       setImagePath(image.path);
     });
   };

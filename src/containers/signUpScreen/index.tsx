@@ -77,14 +77,13 @@ const SignUpScreen = (props: {navigation: any}) => {
     navigation.navigate(LOGIN_SCREEN);
   };
 
-  const onSignUp = () => {
-    // if (validateForm()) {
-    //   console.log('signup Success');
-    //   setEmail('');
-    //   setPassword('');
-    //   setConfirmPassword('');
-    // }
-    dispatch(signUp(email, password));
+  const onSignUp = async () => {
+    if (validateForm()) {
+      await dispatch(signUp(email, password));
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    }
   };
 
   return (

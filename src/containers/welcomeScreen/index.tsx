@@ -20,6 +20,7 @@ const WelcomScreen = (props: {navigation: any}) => {
   const {navigation} = props;
   const dispatch: any = useDispatch();
   const isImageUploding = useSelector(({user}) => user.isImageUploding);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const [imagePath, setImagePath] = useState('');
 
@@ -36,6 +37,7 @@ const WelcomScreen = (props: {navigation: any}) => {
       cropping: true,
     }).then(image => {
       setImagePath(image.path);
+      setIsDisabled(false);
     });
   };
 
@@ -53,6 +55,7 @@ const WelcomScreen = (props: {navigation: any}) => {
           buttonText="Next"
           onPress={onNext}
           icon={<RightArrow />}
+          disabled={isDisabled}
           isLoading={isImageUploding}
         />
       </View>

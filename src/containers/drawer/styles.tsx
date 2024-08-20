@@ -18,4 +18,20 @@ export default StyleSheet.create({
     color: Colors.lightGrey,
     fontWeight: '400',
   },
+  image: {
+    height: 44,
+    width: 44,
+    borderRadius: 44,
+    borderWidth: 1,
+    marginHorizontal: 20,
+    borderColor: Colors.pink,
+    backgroundColor: Colors.pink,
+  },
+  profileContainer: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.pink,
+  },
 });

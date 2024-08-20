@@ -57,9 +57,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   commentContainer: {
-    marginTop: 20,
     marginRight: 10,
   },
   photoContainer: {
