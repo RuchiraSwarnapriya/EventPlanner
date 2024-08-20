@@ -32,7 +32,7 @@ const EditProfileScreen = (props: {navigation: any}) => {
   const authData = useSelector(({authorizer}) => authorizer.authData);
   const userData = useSelector(({user}) => user.userData);
   const profileImageURL = useSelector(({user}) => user.userImageData);
-  const isUserDataUpdating = useSelector(({user}) => user.isUserDataUploading);
+  const isUserDataUpdating = useSelector(({user}) => user.isUserDataUpdating);
   const isUserImageUpdating = useSelector(({user}) => user.isImageUploding);
 
   const [firstName, setFirstName] = useState(userData.firstName);
