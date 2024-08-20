@@ -32,7 +32,7 @@ const HomeDrawer = () => {
       <View style={styles.profileContainer}>
         <Image source={{uri: userData.profileImageURL}} style={styles.image} />
         <ProfileCard
-          name={userData.firstName + userData.lastName}
+          name={userData.firstName + ' ' + userData.lastName}
           email={userData.email}
           noImage={true}
         />
