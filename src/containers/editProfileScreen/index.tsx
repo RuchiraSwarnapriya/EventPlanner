@@ -17,13 +17,14 @@ import CustomTextInput from '../../components/customTextInput';
 
 import WhiteCamIcon from '../../assets/icons/whiteCam.svg';
 
-import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   fetchUserData,
   updateUserData,
   uploadImage,
 } from '../../redux/actions/user';
+
+import styles from './styles';
 
 const EditProfileScreen = (props: {navigation: any}) => {
   const {navigation} = props;

@@ -23,7 +23,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     paddingHorizontal: 5,
-
     justifyContent: 'space-between',
   },
 });

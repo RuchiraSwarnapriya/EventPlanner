@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
+import Loader from '../../components/loader';
 import TextButton from '../../components/buttons/textButton';
 import Titles from '../../components/titles';
 
@@ -82,62 +83,64 @@ const LoginScreen = (props: {navigation: any}) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView>
-          <View style={styles.mainContainer}>
-            <Titles title="Welcome" subTitle="Welcome to your portal" />
-            <View style={styles.inputContainer}>
-              <CustomTextInput
-                label={'Email'}
-                placeholder={'Please enter your email'}
-                onChangeText={(text: string) => {
-                  setEmail(text);
-                  if (emailError) {
-                    setEmailError('');
-                  }
-                }}
-                value={email}
-                iconOne={<MailIcon />}
-                errorText={emailError}
-              />
-              <CustomTextInput
-                label={'Password'}
-                placeholder={'Please enter your password'}
-                onChangeText={(text: string) => {
-                  setPassword(text);
-                  if (passwordError) {
-                    setPasswordError('');
-                  }
-                }}
-                secureTextEntry={true}
-                value={password}
-                iconOne={<PasswordIcon />}
-                iconTwo={<EyeIcon />}
-                errorText={passwordError}
-              />
-              <View style={styles.textButton}>
-                <TextButton
-                  buttonText="Restore password"
-                  onPress={resetPassword}
-                  icon={<AngledArrow />}
+        <View>
+          <ScrollView>
+            <View style={styles.mainContainer}>
+              <Titles title="Welcome" subTitle="Welcome to your portal" />
+              <View style={styles.inputContainer}>
+                <CustomTextInput
+                  label={'Email'}
+                  placeholder={'Please enter your email'}
+                  onChangeText={(text: string) => {
+                    setEmail(text);
+                    if (emailError) {
+                      setEmailError('');
+                    }
+                  }}
+                  value={email}
+                  iconOne={<MailIcon />}
+                  errorText={emailError}
+                />
+                <CustomTextInput
+                  label={'Password'}
+                  placeholder={'Please enter your password'}
+                  onChangeText={(text: string) => {
+                    setPassword(text);
+                    if (passwordError) {
+                      setPasswordError('');
+                    }
+                  }}
+                  secureTextEntry={true}
+                  value={password}
+                  iconOne={<PasswordIcon />}
+                  iconTwo={<EyeIcon />}
+                  errorText={passwordError}
+                />
+                <View style={styles.textButton}>
+                  <TextButton
+                    buttonText="Restore password"
+                    onPress={resetPassword}
+                    icon={<AngledArrow />}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.buttonContainer}>
+                <Button
+                  buttonText="Login"
+                  onPress={onLogin}
+                  icon={<RightArrow />}
+                />
+                <Button
+                  buttonText="Sign Up"
+                  onPress={signUp}
+                  icon={<RightArrow />}
                 />
               </View>
             </View>
-
-            <View style={styles.buttonContainer}>
-              <Button
-                buttonText="Login"
-                onPress={onLogin}
-                isLoading={isLoading}
-                icon={<RightArrow />}
-              />
-              <Button
-                buttonText="Sign Up"
-                onPress={signUp}
-                icon={<RightArrow />}
-              />
-            </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
+          {isLoading && <Loader />}
+        </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

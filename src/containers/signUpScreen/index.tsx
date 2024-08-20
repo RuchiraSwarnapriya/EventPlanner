@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Button from '../../components/buttons/solidButton';
 import CustomTextInput from '../../components/customTextInput';
+import Loader from '../../components/loader';
 import Titles from '../../components/titles';
 
 import {LOGIN_SCREEN} from '../../navigation/routePaths';
@@ -152,7 +153,9 @@ const SignUpScreen = (props: {navigation: any}) => {
               />
             </View>
           </View>
+          {isLoading && <Loader />}
         </ScrollView>
+        src/containers/loginScreen/index.tsx
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
